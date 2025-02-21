@@ -11,19 +11,22 @@ public class GestLogin {
         
         ArrayList<String> utente = new ArrayList<>();
         
-        register(utente);
+        register(utente); // faccio registrare l'utente
 
-        boolean logged = login(utente);
+        boolean logged = login(utente); // login dell'utente
 
-        modificaDati(utente);
+        modificaDati(utente); // modifica dati utente
         
     }
 
     public static void register(ArrayList<String> utente){
+        // creazione scanner
         Scanner myStringScanner = new Scanner(System.in);
+        // variabili ausiliare per dati utente
         String nome = "";
         String pass = "";
         String risposta = "";
+        // richiesta nome
         do{
             System.out.println("Inserisci il tuo nome: ");
             nome = myStringScanner.nextLine().trim();
@@ -32,7 +35,7 @@ public class GestLogin {
             }
 
         }while(nome.isEmpty());
-
+        // richiesta password
         do{
             System.out.println("Inserisci la password: ");
             pass = myStringScanner.nextLine().trim();
@@ -41,7 +44,7 @@ public class GestLogin {
             }
 
         }while(pass.isEmpty());
-
+        // richiesta risposta a domanda segreta
         do{
             System.out.println("Inserisci la risposta alla domanda segreta: ");
             risposta = myStringScanner.nextLine().trim();
@@ -51,15 +54,25 @@ public class GestLogin {
 
         }while(risposta.isEmpty());
 
+        // aggiungo utente
+        utente.add(nome);
+        utente.add(pass);
+        utente.add(risposta);
+        // chiusura scanner
         myStringScanner.close();
     }
+    // per login utente
     public static boolean login(ArrayList<String> utente){
+        // creazione scanner string
         Scanner myStringScanner = new Scanner(System.in);
-        boolean logged= false;
+        boolean logged= false; // controllo per logged non logged
+        // ausiliari per dati utente
         String nome="";
         String pass="";
-        
+
+        // finche non è loggato
         do{
+            // richiesta nome
             do{
                 System.out.println("Inserisci il tuo nome: ");
                 nome = myStringScanner.nextLine().trim();
@@ -68,7 +81,7 @@ public class GestLogin {
                 }
     
             }while(!nome.equals(utente.get(0)));
-    
+            // richiesta password
             do{
                 System.out.println("Inserisci la password: ");
                 pass = myStringScanner.nextLine().trim();
@@ -81,13 +94,18 @@ public class GestLogin {
             logged = true;
 
         }while(!logged);
+        // chiusura scanner
         myStringScanner.close();
         return logged;
     }
     public static void modificaDati(ArrayList<String> utente){
+        // scanner per dati utente
         Scanner myStringScanner = new Scanner(System.in);
+        
+        // ausiliare per risposta a domanda segreta
         String risposta = "";
         System.out.println("per modificare i dati inserisci la risposta segreta");
+        // richiesta risposta
         do{
             System.out.println("inserisci la risposta segreta: ");
             risposta = myStringScanner.nextLine().trim();
@@ -95,9 +113,12 @@ public class GestLogin {
                 System.out.println("Risposta errata");
             }
 
-        }while(!risposta.equals(utente.get(2)));
+        }while(!risposta.equals(utente.get(2))); // finche non inserisce la risposta giusta
 
         System.out.println("adesso puoi modificare i tuoi dati: ");
+        // puo modificare i dati gli faccio inserire tutto di nuovo facendo ripartire register
         register(utente);
+        // chiusura scanner
+        myStringScanner.close();
     }
 }
